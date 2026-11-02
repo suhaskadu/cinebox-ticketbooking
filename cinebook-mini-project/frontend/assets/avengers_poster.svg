@@ -1,0 +1,154 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 900" width="600" height="900">
+  <defs>
+    <!-- Background Cosmic Radial -->
+    <radialGradient id="spaceBg" cx="50%" cy="40%" r="70%" fx="50%" fy="30%">
+      <stop offset="0%" stop-color="#2D114D" />
+      <stop offset="35%" stop-color="#140A2B" />
+      <stop offset="70%" stop-color="#080B14" />
+      <stop offset="100%" stop-color="#030509" />
+    </radialGradient>
+
+    <!-- Red Cosmic Energy -->
+    <radialGradient id="energyRed" cx="30%" cy="65%" r="50%">
+      <stop offset="0%" stop-color="#E50914" stop-opacity="0.45" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Purple Nebula Energy -->
+    <radialGradient id="energyPurple" cx="70%" cy="30%" r="55%">
+      <stop offset="0%" stop-color="#9333EA" stop-opacity="0.5" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Metallic A Gradient -->
+    <linearGradient id="metalA" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F8FAFC" />
+      <stop offset="25%" stop-color="#CBD5E1" />
+      <stop offset="50%" stop-color="#64748B" />
+      <stop offset="75%" stop-color="#94A3B8" />
+      <stop offset="100%" stop-color="#1E293B" />
+    </linearGradient>
+
+    <!-- Gold/Red Quantum Flare -->
+    <linearGradient id="quantumGlow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#EF4444" />
+      <stop offset="50%" stop-color="#F59E0B" />
+      <stop offset="100%" stop-color="#8B5CF6" />
+    </linearGradient>
+
+    <filter id="glowFilter" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="10" result="glow" />
+      <feMerge>
+        <feMergeNode in="glow" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Canvas Background -->
+  <rect width="600" height="900" fill="url(#spaceBg)" />
+  <rect width="600" height="900" fill="url(#energyRed)" />
+  <rect width="600" height="900" fill="url(#energyPurple)" />
+
+  <!-- Stars & Cosmic Dust -->
+  <g opacity="0.6">
+    <circle cx="120" cy="80" r="1.5" fill="#FFFFFF" opacity="0.8"/>
+    <circle cx="280" cy="140" r="1" fill="#FFFFFF" opacity="0.5"/>
+    <circle cx="480" cy="90" r="2" fill="#E2E8F0" opacity="0.9"/>
+    <circle cx="80" cy="320" r="1.5" fill="#F87171" opacity="0.7"/>
+    <circle cx="520" cy="280" r="1.2" fill="#C084FC" opacity="0.8"/>
+    <circle cx="390" cy="220" r="1" fill="#FFFFFF" opacity="0.4"/>
+    <circle cx="210" cy="480" r="1.5" fill="#E2E8F0" opacity="0.6"/>
+    <circle cx="510" cy="530" r="2" fill="#F43F5E" opacity="0.7"/>
+    <circle cx="150" cy="720" r="1.2" fill="#FFFFFF" opacity="0.5"/>
+    <circle cx="430" cy="710" r="1.8" fill="#818CF8" opacity="0.8"/>
+  </g>
+
+  <!-- Top Studio Banner -->
+  <text x="300" y="55" font-family="'Inter', 'Arial', sans-serif" font-weight="800" font-size="13" letter-spacing="9" fill="#E2E8F0" text-anchor="middle" opacity="0.9">
+    MARVEL STUDIOS
+  </text>
+  <line x1="180" y1="65" x2="420" y2="65" stroke="#9333EA" stroke-width="1.5" opacity="0.6"/>
+
+  <!-- Top Cast Credits -->
+  <g font-family="'Inter', 'Arial', sans-serif" font-size="10" font-weight="600" letter-spacing="1.5" fill="#94A3B8" text-anchor="middle">
+    <text x="300" y="100">DOWNEY JR.   •   EVANS   •   HEMSWORTH   •   RUFFALO   •   JOHANSSON</text>
+    <text x="300" y="118">RENNER   •   CHEADLE   •   RUDD   •   LARSON   •   BROLIN</text>
+  </g>
+
+  <!-- Quantum Vortex Ring behind Avengers Logo -->
+  <circle cx="300" cy="360" r="180" stroke="#7C3AED" stroke-width="1.5" fill="none" opacity="0.3" stroke-dasharray="8 6"/>
+  <circle cx="300" cy="360" r="140" stroke="#DC2626" stroke-width="2" fill="none" opacity="0.4" stroke-dasharray="14 10"/>
+  <circle cx="300" cy="360" r="95" stroke="#38BDF8" stroke-width="1" fill="none" opacity="0.3"/>
+
+  <!-- Iconic Avengers "A" Center Emblem -->
+  <g transform="translate(300, 360) scale(1.15)">
+    <!-- Outer Circular Arrow -->
+    <path d="M 0,-115 A 115 115 0 1 0 115,0" fill="none" stroke="url(#metalA)" stroke-width="18" stroke-linecap="round"/>
+    
+    <!-- Outer Arrowhead -->
+    <polygon points="125,-12 110,18 95,-2" fill="#E2E8F0"/>
+
+    <!-- Giant "A" Shape -->
+    <!-- Left Leg -->
+    <polygon points="-58,95 -25,95 10,-85 -18,-85" fill="url(#metalA)" filter="url(#glowFilter)"/>
+    <!-- Right Leg -->
+    <polygon points="10,-85 38,-85 75,95 44,95 24,15" fill="url(#metalA)"/>
+    <!-- Crossbar -->
+    <polygon points="-80,18 72,18 64,36 -80,36" fill="url(#quantumGlow)"/>
+
+    <!-- Inner Cutout Triangle -->
+    <polygon points="3,-40 -12,2 18,2" fill="#0E1322"/>
+  </g>
+
+  <!-- Glowing Quantum Rift / Fractures -->
+  <path d="M 230 460 Q 300 480 370 450" stroke="#E50914" stroke-width="3" fill="none" filter="url(#glowFilter)" opacity="0.8"/>
+  <path d="M 210 470 Q 300 495 390 465" stroke="#9333EA" stroke-width="2" fill="none" filter="url(#glowFilter)" opacity="0.9"/>
+
+  <!-- Movie Title Section -->
+  <g transform="translate(300, 580)" text-anchor="middle">
+    <!-- Tagline -->
+    <text y="0" font-family="'Inter', 'Arial', sans-serif" font-weight="600" font-size="12" letter-spacing="4" fill="#F87171">
+      PART OF THE JOURNEY IS THE END
+    </text>
+
+    <!-- Main Title "AVENGERS" -->
+    <text y="50" font-family="'Impact', 'Arial Black', sans-serif" font-weight="900" font-size="64" letter-spacing="6" fill="#FFFFFF">
+      AVENGERS
+    </text>
+
+    <!-- Subtitle "ENDGAME" -->
+    <text y="92" font-family="'Impact', 'Arial Black', sans-serif" font-weight="900" font-size="38" letter-spacing="12" fill="url(#quantumGlow)">
+      ENDGAME
+    </text>
+  </g>
+
+  <!-- Badges / Specifications Card -->
+  <g transform="translate(75, 720)">
+    <!-- Pill 1: Rating -->
+    <rect x="0" y="0" width="105" height="34" rx="17" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+    <text x="52" y="21" font-family="'Inter', sans-serif" font-weight="700" font-size="11" fill="#FACC15" text-anchor="middle">★ 8.4 / 10</text>
+
+    <!-- Pill 2: Duration -->
+    <rect x="115" y="0" width="105" height="34" rx="17" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+    <text x="167" y="21" font-family="'Inter', sans-serif" font-weight="600" font-size="11" fill="#E2E8F0" text-anchor="middle">🕒 3h 01m</text>
+
+    <!-- Pill 3: Certification -->
+    <rect x="230" y="0" width="95" height="34" rx="17" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+    <text x="277" y="21" font-family="'Inter', sans-serif" font-weight="700" font-size="11" fill="#38BDF8" text-anchor="middle">PG-13</text>
+
+    <!-- Pill 4: Format -->
+    <rect x="335" y="0" width="115" height="34" rx="17" fill="#7C3AED" fill-opacity="0.25" stroke="#9333EA" stroke-width="1"/>
+    <text x="392" y="21" font-family="'Inter', sans-serif" font-weight="800" font-size="11" fill="#C084FC" text-anchor="middle">IMAX 3D / 4DX</text>
+  </g>
+
+  <!-- Bottom Theatrical Billing Block -->
+  <g transform="translate(300, 805)" text-anchor="middle" font-family="'Inter', sans-serif" fill="#64748B" font-size="8" letter-spacing="1">
+    <text y="0">DIRECTED BY ANTHONY AND JOE RUSSO  •  SCREENPLAY BY CHRISTOPHER MARKUS &amp; STEPHEN MCFEELY</text>
+    <text y="15">PRODUCED BY KEVIN FEIGE  •  EXECUTIVE PRODUCERS LOUIS D'ESPOSITO, VICTORIA ALONSO, STAN LEE</text>
+    <text y="30">MUSIC BY ALAN SILVESTRI  •  EXPERIENCE IT IN IMAX® AND DOLBY CINEMA®</text>
+  </g>
+
+  <!-- Bottom Accent Light Line -->
+  <line x1="50" y1="865" x2="550" y2="865" stroke="url(#quantumGlow)" stroke-width="2" opacity="0.7"/>
+</svg>

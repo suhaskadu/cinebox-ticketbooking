@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CineBook – Movie Ticket Booking System | College Data Structures Mini Project</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Impact&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- ========================================================================
+       TOP HEADER & COLLEGE PRESENTATION BAR
+       ======================================================================== -->
+  <header class="header-navbar">
+    <div class="logo-area" onclick="navigateToScreen('screen-home')">
+      <img src="assets/logo.svg" alt="CineBook Logo" class="brand-logo-img">
+      <span class="college-badge">DATA STRUCTURES MINI PROJECT</span>
+    </div>
+
+    <!-- Presentation Screen Navigator -->
+    <nav class="screen-tabs-nav" aria-label="Screen Tabs">
+      <button class="tab-btn active" id="tab-screen-home" onclick="navigateToScreen('screen-home')">
+        <span class="tab-num">1</span> Home
+      </button>
+      <button class="tab-btn" id="tab-screen-seats" onclick="navigateToScreen('screen-seats')">
+        <span class="tab-num">2</span> Seat Selection
+      </button>
+      <button class="tab-btn" id="tab-screen-confirm" onclick="navigateToScreen('screen-confirm')">
+        <span class="tab-num">3</span> Confirmation
+      </button>
+      <button class="tab-btn" id="tab-screen-cancelled" onclick="navigateToScreen('screen-cancelled')">
+        <span class="tab-num">4</span> Cancelled
+      </button>
+    </nav>
+
+    <div class="header-actions">
+      <div class="status-indicator" id="backend-status-pill" title="Status of SQLite Database & Backend REST API">
+        <span class="status-dot"></span>
+        <span id="backend-status-text">SQLite Connected</span>
+      </div>
+      <button class="ds-btn" onclick="openDSModal()">
+        <span>⚡ DS Architecture</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       MAIN DESKTOP VIEWPORT
+       ======================================================================== -->
+  <main class="main-viewport">
+
+    <!-- ======================================================================
+         SCREEN 1: HOME PAGE
+         ====================================================================== -->
+    <section id="screen-home" class="screen-view active-screen">
+      <div class="screen-header-banner">
+        <div class="screen-title">
+          <span class="screen-tag">Screen 1</span>
+          <span>Movie Showcase &amp; Showtime Booking</span>
+        </div>
+        <div class="screen-meta-note">Desktop Presentation Mode • CineBook Cinema Hall 1</div>
+      </div>
+
+      <div class="home-grid">
+        <!-- Movie Poster -->
+        <div class="poster-wrapper">
+          <img src="assets/avengers_poster.svg" alt="Avengers: Endgame Movie Poster" class="movie-poster-img" id="home-poster-img">
+        </div>
+
+        <!-- Movie Details -->
+        <div class="movie-details-col">
+          <div class="project-brand-pill">
+            <span>🎬 NOW SCREENING • IMAX LASER</span>
+          </div>
+
+          <h1 class="movie-main-title" id="home-movie-title">Avengers: Endgame</h1>
+
+          <div class="movie-meta-bar">
+            <span class="meta-pill rating">
+              ★ 8.4 / 10 <small>(1.3M Votes)</small>
+            </span>
+            <span class="meta-pill duration">
+              🕒 3h 01m • 181 mins
+            </span>
+            <span class="meta-pill genre">
+              Action / Sci-Fi / Adventure
+            </span>
+            <span class="meta-pill cert">
+              PG-13
+            </span>
+          </div>
+
+          <p class="movie-synopsis" id="home-movie-synopsis">
+            After the devastating events of Infinity War, the universe is in ruins. With the help of remaining allies, the Avengers assemble once more to reverse Thanos' actions and restore balance to the universe.
+          </p>
+
+          <!-- Show Date Selector -->
+          <div class="show-dates-section">
+            <div class="selector-group-label">Select Show Date:</div>
+            <div class="dates-container" id="home-dates-container">
+              <button class="date-card-btn selected" onclick="selectDate(this, 'Today, Oct 25')">
+                <div class="day-label">TODAY</div>
+                <div class="date-val">25 Oct</div>
+              </button>
+              <button class="date-card-btn" onclick="selectDate(this, 'Tomorrow, Oct 26')">
+                <div class="day-label">TOMORROW</div>
+                <div class="date-val">26 Oct</div>
+              </button>
+              <button class="date-card-btn" onclick="selectDate(this, 'Tuesday, Oct 27')">
+                <div class="day-label">TUE</div>
+                <div class="date-val">27 Oct</div>
+              </button>
+              <button class="date-card-btn" onclick="selectDate(this, 'Wednesday, Oct 28')">
+                <div class="day-label">WED</div>
+                <div class="date-val">28 Oct</div>
+              </button>
+            </div>
+          </div>
+
+          <!-- Showtime Selector -->
+          <div class="show-times-section">
+            <div class="selector-group-label">Select Showtime:</div>
+            <div class="times-container" id="home-times-container">
+              <button class="time-card-btn" onclick="selectTime(this, '10:30 AM')">
+                <div class="time-val">10:30 AM</div>
+                <div class="screen-val">2D IMAX</div>
+              </button>
+              <button class="time-card-btn" onclick="selectTime(this, '02:15 PM')">
+                <div class="time-val">02:15 PM</div>
+                <div class="screen-val">4DX Atmos</div>
+              </button>
+              <button class="time-card-btn selected" onclick="selectTime(this, '06:00 PM')">
+                <div class="time-val">06:00 PM</div>
+                <div class="screen-val">3D Dolby</div>
+              </button>
+              <button class="time-card-btn" onclick="selectTime(this, '09:45 PM')">
+                <div class="time-val">09:45 PM</div>
+                <div class="screen-val">2D IMAX</div>
+              </button>
+            </div>
+          </div>
+
+          <!-- CTA Row -->
+          <div class="cta-row">
+            <button class="primary-glow-btn" onclick="proceedToSeatSelection()">
+              <span>🎟️ Book Tickets</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SCREEN 2: SEAT SELECTION PAGE
+         ====================================================================== -->
+    <section id="screen-seats" class="screen-view">
+      <div class="screen-header-banner">
+        <div class="screen-title">
+          <span class="screen-tag">Screen 2</span>
+          <span>Interactive Cinema Seat Selection (5x6 Grid • 30 Seats)</span>
+        </div>
+        <div class="screen-meta-note">2D Array Data Structure • 5-Minute Temporary Lock</div>
+      </div>
+
+      <div class="seat-booking-layout">
+        <!-- Cinema Hall Graphic & Grid -->
+        <div class="cinema-hall-panel">
+          <!-- Screen Projection Graphic -->
+          <div class="screen-projection-area">
+            <div class="curved-cinema-screen"></div>
+            <div class="projection-beam"></div>
+            <span class="screen-label-text">CINEMA SCREEN THIS WAY</span>
+          </div>
+
+          <!-- 5 Rows (A-E) x 6 Columns Seats Grid -->
+          <div class="seats-grid-container" id="cinema-seats-grid">
+            <!-- Dynamically populated by app.js from Backend SQLite & 2D Matrix -->
+          </div>
+
+          <!-- Color Legend -->
+          <div class="seat-legend-box">
+            <div class="legend-item">
+              <span class="legend-swatch swatch-avail"></span>
+              <span>Available (Green)</span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-swatch swatch-selected"></span>
+              <span>Selected (Yellow)</span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-swatch swatch-locked"></span>
+              <span>Locked for 5 Min (Violet)</span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-swatch swatch-booked"></span>
+              <span>Booked (Red)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Checkout & Expiry Sidebar -->
+        <aside class="seat-checkout-panel">
+          <div class="checkout-card">
+            <div class="card-heading">
+              <span>Booking Summary</span>
+              <span class="avail-count-badge" id="avail-seat-badge">Available: 27 / 30</span>
+            </div>
+
+            <!-- Temporary 5-Minute Lock Timer Box -->
+            <div class="lock-timer-banner" id="lock-timer-box" style="display: none;">
+              <span class="timer-countdown-val" id="lock-countdown-display">05:00</span>
+              <div class="lock-timer-desc">
+                <strong>Seat Locked:</strong> Seat is temporarily held for 5 minutes while you complete booking.
+              </div>
+            </div>
+
+            <div class="seat-summary-list">
+              <div class="summary-row">
+                <span>Movie:</span>
+                <strong id="summary-movie">Avengers: Endgame</strong>
+              </div>
+              <div class="summary-row">
+                <span>Date &amp; Time:</span>
+                <span id="summary-datetime">Today, 25 Oct • 06:00 PM</span>
+              </div>
+              <div class="summary-row">
+                <span>Selected Seat:</span>
+                <strong id="summary-seat-label" style="color: #facc15;">None (Click a green seat)</strong>
+              </div>
+              <div class="summary-row">
+                <span>Seat Category:</span>
+                <span id="summary-tier">Standard Class</span>
+              </div>
+              <div class="summary-row">
+                <span>Ticket Base Price:</span>
+                <span id="summary-base-price">₹0.00</span>
+              </div>
+              <div class="summary-row">
+                <span>GST &amp; Cinema Cess (18%):</span>
+                <span id="summary-tax">₹0.00</span>
+              </div>
+              <div class="summary-row total-row">
+                <span>Total Amount:</span>
+                <span id="summary-total-price" style="color: #34d399;">₹0.00</span>
+              </div>
+            </div>
+
+            <div class="action-buttons-group">
+              <button class="btn-confirm" id="btn-confirm-booking" disabled onclick="confirmSelectedSeatBooking()">
+                Confirm Booking
+              </button>
+              <button class="btn-cancel-opt" onclick="cancelCurrentSeatSelection()">
+                Cancel Booking Selection
+              </button>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SCREEN 3: BOOKING CONFIRMATION PAGE
+         ====================================================================== -->
+    <section id="screen-confirm" class="screen-view">
+      <div class="screen-header-banner">
+        <div class="screen-title">
+          <span class="screen-tag">Screen 3</span>
+          <span>Booking Successful Confirmation</span>
+        </div>
+        <div class="screen-meta-note">Transaction Committed to SQLite • Audit Trail Updated</div>
+      </div>
+
+      <div class="confirmation-layout">
+        <div class="success-hero-banner">
+          <div class="check-icon-circle">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="3">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          </div>
+          <h2>Booking Confirmed!</h2>
+          <p>Your movie ticket has been reserved and stored in CineBook Database.</p>
+        </div>
+
+        <!-- Digital Ticket Card -->
+        <div class="digital-ticket-card">
+          <div class="ticket-left-artwork">
+            <img src="assets/avengers_poster.svg" alt="Poster" class="ticket-artwork-thumb">
+            <div class="ticket-booking-ref" id="ticket-booking-id">CB-84920-C4</div>
+            <div style="font-size: 0.72rem; color: #94a3b8; margin-top: 0.5rem;">CineBook e-Pass</div>
+          </div>
+
+          <div class="ticket-right-details">
+            <div class="ticket-header-meta">
+              <div>
+                <h3 class="ticket-movie-title" id="ticket-movie-title">Avengers: Endgame</h3>
+                <span class="ticket-cinema-audi">CineBook Cinemas • Screen 1 (IMAX Laser)</span>
+              </div>
+              <span class="college-badge" style="background: rgba(16, 185, 129, 0.2); border-color: #10b981; color: #34d399;">
+                ACTIVE TICKET
+              </span>
+            </div>
+
+            <div class="ticket-grid-specs">
+              <div class="spec-cell">
+                <div class="spec-label">Show Date</div>
+                <div class="spec-val" id="ticket-show-date">Today, 25 Oct</div>
+              </div>
+              <div class="spec-cell">
+                <div class="spec-label">Showtime</div>
+                <div class="spec-val" id="ticket-show-time">06:00 PM</div>
+              </div>
+              <div class="spec-cell">
+                <div class="spec-label">Row &amp; Seat No.</div>
+                <div class="spec-val seat-highlight" id="ticket-seat-code">Row C • Seat 4 (C4)</div>
+              </div>
+              <div class="spec-cell">
+                <div class="spec-label">Hall Format</div>
+                <div class="spec-val">IMAX 3D Atmos</div>
+              </div>
+              <div class="spec-cell">
+                <div class="spec-label">Booking Time</div>
+                <div class="spec-val" id="ticket-created-at">Today, 12:08 PM</div>
+              </div>
+              <div class="spec-cell">
+                <div class="spec-label">Customer ID</div>
+                <div class="spec-val" id="ticket-customer-id">Student / Demo</div>
+              </div>
+            </div>
+
+            <div class="ticket-price-receipt">
+              <div>
+                <div style="font-size: 0.8rem; color: #94a3b8;">Total Ticket Price (Inclusive of Taxes)</div>
+                <div style="font-size: 1.5rem; font-weight: 900; color: #34d399;" id="ticket-total-price">₹295.00</div>
+              </div>
+              <div style="font-size: 0.75rem; color: #64748b; text-align: right;">
+                Base: <span id="ticket-base-price">₹250.00</span> | Tax: <span id="ticket-tax-price">₹45.00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ticket-actions-bar">
+          <button class="btn-ticket-cancel" onclick="cancelActiveBookingFromConfirmation()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+            <span>Cancel Booking</span>
+          </button>
+          <button class="btn-ticket-home" onclick="navigateToScreen('screen-home')">
+            <span>← Back to Home</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SCREEN 4: BOOKING CANCELLED PAGE
+         ====================================================================== -->
+    <section id="screen-cancelled" class="screen-view">
+      <div class="screen-header-banner">
+        <div class="screen-title">
+          <span class="screen-tag">Screen 4</span>
+          <span>Booking Cancellation &amp; Seat Pool Rollback</span>
+        </div>
+        <div class="screen-meta-note">Doubly Linked List Rollback • Seat Reverted to Available</div>
+      </div>
+
+      <div class="cancelled-layout">
+        <div class="cancelled-hero-banner">
+          <div class="cancelled-icon-circle">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="3">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </div>
+          <h2 style="font-size: 2.2rem; font-weight: 900; color: #ffffff;">Booking Cancelled</h2>
+          <p style="color: var(--text-muted); font-size: 1rem;">
+            Your ticket reservation was successfully cancelled. The seat has been restored to the live pool.
+          </p>
+        </div>
+
+        <div class="cancelled-card">
+          <h3 style="font-size: 1.2rem; color: #f8fafc; margin-bottom: 1rem;">
+            Data Structure Rollback Verification
+          </h3>
+
+          <div class="rollback-visual-box">
+            <div class="rollback-state-item">
+              <div style="font-size: 0.75rem; color: #94a3b8; text-transform: uppercase;">Previous State</div>
+              <div class="seat-item booked" style="cursor: default; width: 56px; height: 50px;">
+                <span id="cancelled-seat-code-prev">C4</span>
+              </div>
+              <div style="font-size: 0.75rem; color: #f87171;">Status: BOOKED</div>
+            </div>
+
+            <div class="rollback-arrow">➔</div>
+
+            <div class="rollback-state-item">
+              <div style="font-size: 0.75rem; color: #94a3b8; text-transform: uppercase;">Current Live State</div>
+              <div class="seat-item available" style="cursor: default; width: 56px; height: 50px;">
+                <span id="cancelled-seat-code-now">C4</span>
+              </div>
+              <div style="font-size: 0.75rem; color: #34d399;">Status: AVAILABLE (Green)</div>
+            </div>
+          </div>
+
+          <div class="updated-stat-box">
+            <div>
+              <div class="stat-label-big">Live Theater Seat Availability:</div>
+              <div style="font-size: 0.8rem; color: #94a3b8;">
+                The seat was instantly freed and the available seat count has incremented.
+              </div>
+            </div>
+            <div class="stat-number-pill" id="cancelled-avail-count">
+              27 / 30 Available
+            </div>
+          </div>
+
+          <div style="text-align: center; margin-top: 1rem;">
+            <button class="primary-glow-btn" style="margin: 0 auto;" onclick="navigateToScreen('screen-seats')">
+              <span>🔄 Book Again</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================================================
+       DATA STRUCTURES COLLEGE PROJECT MODAL
+       ======================================================================== -->
+  <div class="ds-modal-overlay" id="ds-modal-overlay">
+    <div class="ds-modal-content">
+      <button class="modal-close-btn" onclick="closeDSModal()">×</button>
+      
+      <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.5rem;">
+        <span class="college-badge">COLLEGE MINI PROJECT SPECIFICATION</span>
+        <span style="font-size: 0.82rem; color: #38bdf8;">C++ Native Engine • Data Structures &amp; Algorithms Applied</span>
+      </div>
+      <h2 style="font-size: 1.8rem; font-weight: 900; color: #ffffff;">
+        CineBook C++ Data Structures Architecture
+      </h2>
+      <p style="font-size: 0.9rem; color: #94a3b8; margin-top: 0.3rem;">
+        Here is how each classical Data Structure is implemented in C++ and powers the CineBook ticket booking system:
+      </p>
+
+      <div class="ds-cards-grid">
+        <!-- 1. 2D Array Matrix -->
+        <div class="ds-card">
+          <span class="ds-badge matrix">2D Array / Matrix (C++ SeatMatrix)</span>
+          <h3>Theater Seating Grid</h3>
+          <p>
+            Represented as a 5-row by 6-column matrix (<code>Seat grid[5][6]</code>). Rows A-E map to index 0-4, columns 1-6 map to index 0-5.
+          </p>
+          <div class="ds-complexity">Access Time: O(1) direct row/col indexing</div>
+        </div>
+
+        <!-- 2. Hash Map -->
+        <div class="ds-card">
+          <span class="ds-badge hash">Hash Map (C++ SeatHashMap)</span>
+          <h3>O(1) Instant Seat Lookup</h3>
+          <p>
+            Custom bucket-chaining hash table mapping seat codes (e.g. <code>"C4"</code>) directly to seat status, pricing, and lock timestamps.
+          </p>
+          <div class="ds-complexity">Lookup &amp; Update: O(1) average time</div>
+        </div>
+
+        <!-- 3. Min-Heap Priority Queue -->
+        <div class="ds-card">
+          <span class="ds-badge heap">Min-Heap (C++ LockExpiryPriorityQueue)</span>
+          <h3>5-Minute Temporary Lock Expiry</h3>
+          <p>
+            When a user selects a seat, an expiration tuple <code>(expiry_timestamp, seat_code)</code> is pushed to the min-heap. The earliest expiring lock is always at the root.
+          </p>
+          <div class="ds-complexity">Lock Scheduling: O(log N) insertion</div>
+        </div>
+
+        <!-- 4. FIFO Queue -->
+        <div class="ds-card">
+          <span class="ds-badge fifo">FIFO Queue (C++ BookingFIFOQueue)</span>
+          <h3>Booking Transaction Pipeline</h3>
+          <p>
+            Prevents concurrency race conditions when multiple users click confirm simultaneously. Requests are handled First-Come, First-Served in O(1) time.
+          </p>
+          <div class="ds-complexity">Enqueue / Dequeue: O(1) time</div>
+        </div>
+
+        <!-- 5. Doubly Linked List -->
+        <div class="ds-card">
+          <span class="ds-badge list">Doubly Linked List (C++ BookingHistoryDLL)</span>
+          <h3>Booking Audit Trail &amp; Rollback</h3>
+          <p>
+            Maintains chronological history of locks, bookings, and cancellations with bidirectional <code>prev</code> and <code>next</code> pointers for instant rollback.
+          </p>
+          <div class="ds-complexity">Append &amp; Rollback: O(1) pointer updates</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Popups -->
+  <div class="toast-notification" id="toast-notif">
+    <span id="toast-icon">ℹ️</span>
+    <span id="toast-message">Notification message</span>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
